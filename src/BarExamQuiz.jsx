@@ -64,7 +64,7 @@ const questionPool = [
 ];
 
 const Card = ({ children }) => (
-  <div className="border rounded-xl shadow-md p-4 bg-white">{children}</div>
+  <div Name="border rounded-xl shadow-md p-4 bg-white">{children}</div>
 );
 
 const CardContent = ({ children }) => <div>{children}</div>;
@@ -73,7 +73,7 @@ const Button = ({ children, onClick, disabled, className = "" }) => (
   <button
     onClick={onClick}
     disabled={disabled}
-    className={\`px-4 py-2 border rounded-lg text-left hover:bg-gray-100 w-full \${className}\`}
+    className={`px-4 py-2 border rounded-lg text-left hover:bg-gray-100 w-full ${className}`}
   >
     {children}
   </button>
