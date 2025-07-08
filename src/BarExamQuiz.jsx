@@ -64,7 +64,7 @@ const questionPool = [
 ];
 
 const Card = ({ children }) => (
-  <div className="border rounded-2xl shadow-lg p-6 bg-white text-gray-900 space-y-4">
+  <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4 border border-gray-200">
     {children}
   </div>
 );
@@ -75,7 +75,7 @@ const Button = ({ children, onClick, disabled, className = "" }) => (
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-3 border rounded-xl text-left hover:bg-blue-50 transition w-full text-base ${className}`}
+    className={`px-5 py-3 rounded-xl w-full text-left border transition hover:bg-blue-50 ${className}`}
   >
     {children}
   </button>
@@ -112,14 +112,14 @@ export default function BarExamQuiz() {
   const uniqueTopics = ["All", ...new Set(questionPool.map((q) => q.topic))];
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-2xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-blue-900 mb-8">
-          Elizabeth Bar Exam Quiz Practice
+    <div className="min-h-screen bg-gray-50 py-12 px-4">
+      <div className="max-w-3xl mx-auto">
+        <h1 className="text-4xl font-bold text-blue-900 text-center mb-10">
+          Bar Exam Quiz Practice
         </h1>
 
         <div className="mb-8">
-          <label className="block mb-2 text-base font-medium text-gray-700">
+          <label className="block text-lg font-medium text-gray-700 mb-2">
             Select Topic:
           </label>
           <select
@@ -131,7 +131,7 @@ export default function BarExamQuiz() {
               setSelected(null);
               setShowAnswer(false);
             }}
-            className="w-full p-3 border border-gray-300 rounded-lg text-base"
+            className="w-full border border-gray-300 p-3 rounded-lg text-base"
           >
             {uniqueTopics.map((topic, index) => (
               <option key={index} value={topic}>
@@ -171,7 +171,10 @@ export default function BarExamQuiz() {
                 <p className="mt-2 text-sm text-gray-700">
                   Explanation: {current.explanation}
                 </p>
-                <Button className="mt-4 bg-blue-500 text-white hover:bg-blue-600" onClick={handleNext}>
+                <Button
+                  className="mt-4 bg-blue-600 text-white hover:bg-blue-700 border-blue-600"
+                  onClick={handleNext}
+                >
                   Next Question
                 </Button>
               </div>
