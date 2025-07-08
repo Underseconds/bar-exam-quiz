@@ -64,7 +64,9 @@ const questionPool = [
 ];
 
 const Card = ({ children }) => (
-  <div Name="border rounded-xl shadow-md p-4 bg-white">{children}</div>
+  <div className="border rounded-2xl shadow-lg p-6 bg-white text-gray-900 space-y-4">
+    {children}
+  </div>
 );
 
 const CardContent = ({ children }) => <div>{children}</div>;
@@ -73,7 +75,7 @@ const Button = ({ children, onClick, disabled, className = "" }) => (
   <button
     onClick={onClick}
     disabled={disabled}
-    className={`px-4 py-2 border rounded-lg text-left hover:bg-gray-100 w-full ${className}`}
+    className={`px-4 py-3 border rounded-xl text-left hover:bg-blue-50 transition w-full text-base ${className}`}
   >
     {children}
   </button>
@@ -110,67 +112,77 @@ export default function BarExamQuiz() {
   const uniqueTopics = ["All", ...new Set(questionPool.map((q) => q.topic))];
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Bar Exam Quiz Practice</h1>
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-blue-900 mb-8">
+          Elizabeth Bar Exam Quiz Practice
+        </h1>
 
-      <div className="mb-6">
-        <label className="block mb-2 text-sm font-medium text-gray-700">
-          Select Topic:
-        </label>
-        <select
-          value={selectedTopic}
-          onChange={(e) => {
-            setSelectedTopic(e.target.value);
-            setCurrentIndex(0);
-            setScore(0);
-            setSelected(null);
-            setShowAnswer(false);
-          }}
-          className="w-full p-2 border rounded-lg"
-        >
-          {uniqueTopics.map((topic, index) => (
-            <option key={index} value={topic}>
-              {topic}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <Card>
-        <CardContent>
-          <p className="text-sm text-gray-500 mb-2">[{current.topic}]</p>
-          <h2 className="text-xl font-semibold mb-4">{current.question}</h2>
-          <div className="space-y-2">
-            {current.choices.map((choice, idx) => (
-              <Button
-                key={idx}
-                className={selected === choice ? "bg-gray-200" : ""}
-                onClick={() => handleChoice(choice)}
-                disabled={showAnswer}
-              >
-                {choice}
-              </Button>
+        <div className="mb-8">
+          <label className="block mb-2 text-base font-medium text-gray-700">
+            Select Topic:
+          </label>
+          <select
+            value={selectedTopic}
+            onChange={(e) => {
+              setSelectedTopic(e.target.value);
+              setCurrentIndex(0);
+              setScore(0);
+              setSelected(null);
+              setShowAnswer(false);
+            }}
+            className="w-full p-3 border border-gray-300 rounded-lg text-base"
+          >
+            {uniqueTopics.map((topic, index) => (
+              <option key={index} value={topic}>
+                {topic}
+              </option>
             ))}
-          </div>
-          {showAnswer && (
-            <div className="mt-4">
-              <p className="text-lg font-bold">
-                {selected === current.answer ? "✅ Correct!" : "❌ Incorrect."}
-              </p>
-              <p className="mt-1 text-sm text-gray-700">
-                Explanation: {current.explanation}
-              </p>
-              <Button className="mt-4" onClick={handleNext}>
-                Next Question
-              </Button>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+          </select>
+        </div>
 
-      <p className="mt-6 text-center text-sm text-gray-600">
-        Score: {score} / {currentIndex + 1}
-      </p>
+        <Card>
+          <CardContent>
+            <p className="text-sm text-gray-500">[{current.topic}]</p>
+            <h2 className="text-2xl font-semibold mb-6 leading-snug">
+              {current.question}
+            </h2>
+            <div className="space-y-3">
+              {current.choices.map((choice, idx) => (
+                <Button
+                  key={idx}
+                  className={
+                    selected === choice
+                      ? "bg-blue-100 border-blue-300"
+                      : "border-gray-300"
+                  }
+                  onClick={() => handleChoice(choice)}
+                  disabled={showAnswer}
+                >
+                  {choice}
+                </Button>
+              ))}
+            </div>
+            {showAnswer && (
+              <div className="mt-6">
+                <p className="text-lg font-bold">
+                  {selected === current.answer ? "✅ Correct!" : "❌ Incorrect."}
+                </p>
+                <p className="mt-2 text-sm text-gray-700">
+                  Explanation: {current.explanation}
+                </p>
+                <Button className="mt-4 bg-blue-500 text-white hover:bg-blue-600" onClick={handleNext}>
+                  Next Question
+                </Button>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        <p className="mt-6 text-center text-base text-gray-600">
+          Score: {score} / {currentIndex + 1}
+        </p>
+      </div>
     </div>
   );
 }
