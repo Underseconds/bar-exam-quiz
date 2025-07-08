@@ -60,32 +60,26 @@ const questionPool = [
     ],
     answer: "Testator under undue influence",
     explanation: "A will is invalid if obtained through undue influence, fraud, or coercion."
-  },
-  {
-    topic: "Corporations",
-    question: "What is the business judgment rule?",
-    choices: [
-      "A rule requiring courts to evaluate business decisions based on profitability",
-      "A rule that protects directors from liability if they act in good faith and in the best interests of the corporation",
-      "A requirement that all shareholder meetings are recorded",
-      "A test used in partnership dissolution"
-    ],
-    answer: "A rule that protects directors from liability if they act in good faith and in the best interests of the corporation",
-    explanation: "The business judgment rule shields corporate directors from liability when they make informed, good-faith decisions."
-  },
-  {
-    topic: "Agency",
-    question: "Which of the following is true about actual authority?",
-    choices: [
-      "It arises from a principal's conduct towards a third party",
-      "It includes both express and implied authority",
-      "It only exists if in writing",
-      "It can never be terminated"
-    ],
-    answer: "It includes both express and implied authority",
-    explanation: "Actual authority can be express (stated) or implied (arising from the conduct or situation)."
   }
 ];
+
+const Card = ({ children }) => (
+  <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4 border border-gray-200">
+    {children}
+  </div>
+);
+
+const CardContent = ({ children }) => <div>{children}</div>;
+
+const Button = ({ children, onClick, disabled, className = "" }) => (
+  <button
+    onClick={onClick}
+    disabled={disabled}
+    className={`px-5 py-3 rounded-xl w-full text-left border transition hover:bg-blue-50 ${className}`}
+  >
+    {children}
+  </button>
+);
 
 export default function BarExamQuiz() {
   const [selectedTopic, setSelectedTopic] = useState("All");
@@ -121,7 +115,7 @@ export default function BarExamQuiz() {
     <div className="min-h-screen bg-gray-50 py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-4xl font-bold text-blue-900 text-center mb-10">
-          Elizabeth's Bar Exam Quiz Practice
+          Bar Exam Quiz Practice
         </h1>
 
         <div className="mb-8">
